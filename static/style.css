@@ -1,0 +1,4 @@
+form#auth, form#register {
+    background: #f8f9fa;
+    border-radius: 4px;
+}
