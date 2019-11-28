@@ -6,7 +6,7 @@ from flask_login import current_user, login_user
 from app.models import User, Tweet
 from sqlalchemy import desc
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/gaz', methods=['GET', 'POST'])
 def home():
     form = NewTweetForm()
     if form.validate_on_submit():
