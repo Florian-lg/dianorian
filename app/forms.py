@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
+from flask_login import current_user
 
 class AuthForm(FlaskForm):
     username = StringField('Nom d\'utilisateur', validators=[DataRequired()])
@@ -33,3 +34,13 @@ class NewTweetForm(FlaskForm):
     name = StringField('Votre nom : ', validators=[DataRequired()])
     text = StringField('Entrez votre tweet', validators=[DataRequired()])
     submit = SubmitField('Tweeter !')
+
+class UpdateProfileForm(FlaskForm):
+    #get user
+    user = current_user
+    password = PasswordField('Mot de passe', validators=[DataRequired()])
+    password2 = PasswordField(
+        'Repetez le mot de passe', validators=[DataRequired(), EqualTo('password')])
+    firstname = StringField('Prenom', validators=[DataRequired()], default = "prenom")
+    lastname = StringField('Nom', validators=[DataRequired()], default = "nom")
+    submit = SubmitField('Enregistrer')

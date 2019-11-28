@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for
 from app import app, db
 from datetime import datetime
-from app.forms import AuthForm, RegisterForm, NewTweetForm
+from app.forms import AuthForm, RegisterForm, NewTweetForm, UpdateProfileForm
 from flask_login import current_user, login_user
 from app.models import User, Tweet
 from sqlalchemy import desc
@@ -53,3 +53,24 @@ def register():
         flash('Feliciations, vous etes enregistre(e) !')
         return redirect(url_for('auth'))
     return render_template('user/forms/register.html', title='Register', form=form)
+
+@app.route('/profile', methods = ['GET', 'POST'])
+def profile():
+    if current_user.is_authenticated:
+        return render_template('user/profile.html', user = current_user)
+    else:
+        return redirect(url_for('home'))
+
+@app.route('/profile/edit', methods = ['GET', 'POST'])
+def editProfile():
+    form = UpdateProfileForm()
+    if current_user.is_authenticated:
+        return render_template('user/editProfile.html', user = current_user, form = form)
+    else:
+        return redirect(url_for('home'))
+
+@app.route('/timeline/<username>', methods = ['GET', 'POST'])
+def allTweetsUser(username):
+    user = User.query.filter_by(username = username).first()
+    tweets_list = Tweet.query.filter_by(user_id = user.id).all()
+    return render_template('allTweetsUser.html', user = user, tweets_list = tweets_list)
