@@ -31,8 +31,8 @@ class RegisterForm(FlaskForm):
             raise ValidationError('Please use a different email address.')
 
 class NewTweetForm(FlaskForm):
-    username = StringField('Votre nom : ', validators=[DataRequired()])
-    message = StringField('Entrez votre tweet', validators=[DataRequired()])
+    name = StringField('Votre nom : ', validators=[DataRequired()])
+    text = StringField('Entrez votre tweet', validators=[DataRequired()])
     submit = SubmitField('Tweeter !')
 
 class UpdateProfileForm(FlaskForm):

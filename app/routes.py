@@ -6,16 +6,25 @@ from flask_login import current_user, login_user
 from app.models import User, Tweet
 from sqlalchemy import desc
 
+@app.route('/')
+def homeRedirection():
+    return redirect(url_for('home'))
+
 @app.route('/gaz', methods=['GET', 'POST'])
 def home():
-    form = NewTweetForm()
+    form = NewTweetForm(prefix = 'user-')
     if form.validate_on_submit():
-        tweet = Tweet(message = form.message.data, user_id = current_user.id)
+        tweet = Tweet(message = form.text.data, user_id = current_user.id)
         db.session.add(tweet)
         db.session.commit()
         return redirect(url_for('home'))
     tweets_list = Tweet.query.order_by(desc(Tweet.timestamp)).all()
     return render_template('home.html', form = form, tweets_list = tweets_list, user = current_user)
+
+@app.route('/timeline', methods=['GET', 'POST'])
+def timeline():
+    tweets_list = Tweet.query.order_by(desc(Tweet.timestamp)).all()
+    return render_template('tweet/timeline.html', tweets_list = tweets_list)
 
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
