@@ -15,7 +15,7 @@ def home():
         db.session.commit()
         return redirect(url_for('home'))
     tweets_list = Tweet.query.order_by(desc(Tweet.timestamp)).all()
-    return render_template('home.html', form = form, tweets_list = tweets_list)
+    return render_template('home.html', form = form, tweets_list = tweets_list, user = current_user)
 
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
