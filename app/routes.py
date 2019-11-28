@@ -59,3 +59,9 @@ def editProfile():
         return render_template('user/editProfile.html', user = current_user, form = form)
     else:
         return redirect(url_for('home'))
+
+@app.route('/timeline/<username>', methods = ['GET', 'POST'])
+def allTweetsUser(username):
+    user = User.query.filter_by(username = username).first()
+    tweets_list = Tweet.query.filter_by(user_id = user.id).all()
+    return render_template('allTweetsUser.html', user = user, tweets_list = tweets_list)

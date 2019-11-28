@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+<div id="timeline">
+    <p>Les tweets de {{user.username}}</p>
+        {% for tweet in tweets_list %}
+        <div id="tweet-{{ loop.index }}" class="mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ tweet.user_id }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@User_{{ tweet.user_id }}</h6>
+                    <p class="card-text">{{ tweet.message }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+</div>
+{% endblock %}
