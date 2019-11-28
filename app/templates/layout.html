@@ -12,7 +12,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="https://upload.wikimedia.org/wikipedia/fr/c/c8/Twitter_Bird.svg"
+        <a class="navbar-brand" href="{{ url_for('home') }}"><img src="https://upload.wikimedia.org/wikipedia/fr/c/c8/Twitter_Bird.svg"
                 height="50" /></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/">Timeline<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{ url_for('home') }}">Timeline<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/trending">Tendances</a>
@@ -37,8 +37,19 @@
             </ul>
         </div>
     </nav>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
     <div id="content">
-        {% block content %}{% endblock %}
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
     </div>
 </body>
 
