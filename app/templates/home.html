@@ -1,27 +1,28 @@
 {% extends "layout.html" %}
+{% block title %} Homepage {% endblock %}
 {% block content %}
-<form action="" method="post" novalidate>
+<form action="" method="post" novalidate class="form-inline mb-3" id="pytter">
     {{ form.hidden_tag() }}
     {{ form.csrf_token }}
-    <p>
+    <div class="form-group {% if user %}d-none{% endif %}">
         {{ form.name.label }}<br>
-        {{ form.name(size=64, value = user.username ) }}
-    </p>
-    <p>
-        {{ form.text.label }}<br>
-        {{ form.text(size=64) }}
-    </p>
-    <p>{{ form.submit(class = 'btn btn-primary') }}</p>
+        {{ form.name(size=64, value=user.username, class='form-control px-2 py-4' ) }}
+    </div>
+    <div class="form-group">
+        {{ form.text.label(class='d-none h-0') }}<br>
+        {{ form.text(size=64, class='form-control px 3 py-4 my-3', placeholder='Qu\'est-ce que vous voulez dire ?') }}
+    </div>
+    {{ form.submit(class = 'btn btn-success my-3 ml-2') }}
 </form>
 <div id="timeline">
+    {{debug}}
     {% for tweet in tweets_list %}
     <div id="tweet-{{ loop.index }}" class="mb-3">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ tweet.user_id }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">@User_{{ tweet.user_id }}</h6>
                 {% if tweet.message %}
-                    <p class="card-text">{{ tweet.message }}</p>
+                <p class="card-text">{{ tweet.message }}</p>
                 {% endif %}
             </div>
         </div>

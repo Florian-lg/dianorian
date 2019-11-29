@@ -1,0 +1,10 @@
+form#auth, form#register {
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+#pytter {
+    justify-content: center;
+}
+#user-submit {
+    padding: 12px 25px;
+}

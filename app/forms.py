@@ -33,7 +33,7 @@ class RegisterForm(FlaskForm):
 class NewTweetForm(FlaskForm):
     name = StringField('Votre nom : ', validators=[DataRequired()])
     text = StringField('Entrez votre tweet', validators=[DataRequired()])
-    submit = SubmitField('Tweeter !')
+    submit = SubmitField('Pyttez !')
 
 class UpdateProfileForm(FlaskForm):
     #get user
