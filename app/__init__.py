@@ -11,3 +11,8 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 
 from app import routes, models
+
+@app.after_request
+def add_header(response):
+    response.cache_control.max_age = 300
+    return response
