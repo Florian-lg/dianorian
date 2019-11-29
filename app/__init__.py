@@ -15,4 +15,5 @@ from app import routes, models
 @app.after_request
 def add_header(response):
     response.cache_control.max_age = 300
+    response.headers.add('Access-Control-Allow-Origin', '*')
     return response
