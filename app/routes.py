@@ -1,8 +1,8 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, session, request
 from app import app, db
 from datetime import datetime
 from app.forms import AuthForm, RegisterForm, NewTweetForm, UpdateProfileForm
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, logout_user
 from app.models import User, Tweet
 from sqlalchemy import desc
 
@@ -39,6 +39,11 @@ def auth():
         login_user(user, remember=form.remember_me.data)
         return redirect(url_for('home'))
     return render_template('user/forms/auth.html', form = form)
+
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
