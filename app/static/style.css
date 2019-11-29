@@ -8,3 +8,33 @@ form#auth, form#register {
 #user-submit {
     padding: 12px 25px;
 }
+.btn-success{
+    background-color:#2F787E;
+    border-color: #2F787E;
+    box-shadow: none !important;
+}
+.btn-success:hover{
+    background-color:#9FC1C3;
+    border-color: #9FC1C3;
+    box-shadow: none !important;
+}
+.btn-outline-success{
+    border-color: #2F787E;
+    color: #2F787E;
+    box-shadow: none !important;
+}
+.btn-outline-success:hover{
+    background-color:#2F787E;
+    border-color: #2F787E;
+    box-shadow: none !important;
+}
+.btn-outline-success:focus, .btn-outline-success:active{
+    background-color:#31858B !important;
+    border-color: #31858B !important;
+    box-shadow: none !important;
+}
+.btn-success:focus, .btn-success:active{
+    background-color:#31858B !important;
+    border-color: #31858B !important;
+    box-shadow: none !important;
+}

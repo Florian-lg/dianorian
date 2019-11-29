@@ -1,6 +1,6 @@
 """Import some useful modules"""
-from flask import render_template, flash, redirect, url_for
-from flask_login import current_user, login_user
+from flask import render_template, flash, redirect, url_for, session, request
+from flask_login import current_user, login_user, logout_user
 from sqlalchemy import desc
 from app import app, db
 from app.forms import AuthForm, RegisterForm, NewTweetForm, UpdateProfileForm
@@ -44,7 +44,13 @@ def auth():
         return redirect(url_for('home'))
     return render_template('user/forms/auth.html', form=form)
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route("/logout")
+def logout():
+    """Used to logout users"""
+    logout_user()
+    return redirect(url_for('home'))
+
+@app.route('/register', methods = ['GET', 'POST'])
 def register():
     """Registration of users"""
     if current_user.is_authenticated:
