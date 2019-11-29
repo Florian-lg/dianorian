@@ -1,9 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
 <h1>{{user.username}}</h1>
-<p>{{user.firstname}}</p>
+
+Prénom : <p>{{user.firstname}}</p>
+Nom :<p>{{user.lastname}}</p>
+Email : <p>{{user.email}}</p>
 
 <a class="btn btn-primary" href="{{url_for('editProfile')}}">Editer le profil</a>
-
-
 {% endblock %}
