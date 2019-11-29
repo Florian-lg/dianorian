@@ -41,6 +41,7 @@ class NewTweetForm(FlaskForm):
     text = StringField('Entrez votre tweet', validators=[DataRequired()])
     submit = SubmitField('Pyttez !')
 
+
 class UpdateProfileForm(FlaskForm):
     """Profile update form"""
     #get user

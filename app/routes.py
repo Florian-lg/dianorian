@@ -16,10 +16,13 @@ def home():
     """Home function, will render some tweets and forms"""
     form = NewTweetForm(prefix='user-')
     if form.validate_on_submit():
-        tweet = Tweet(message=form.text.data, user_id=current_user.id)
-        db.session.add(tweet)
-        db.session.commit()
-        return redirect(url_for('home'))
+        if(len(form.text.data) <= 280):
+            tweet = Tweet(message=form.text.data, user_id=current_user.id)
+            db.session.add(tweet)
+            db.session.commit()
+            return redirect(url_for('home'))
+        else:
+            flash('Votre message est trop long...')
     tweets_list = Tweet.query.order_by(desc(Tweet.timestamp)).all()
     return render_template('home.html', form=form, tweets_list=tweets_list, user=current_user)
 
