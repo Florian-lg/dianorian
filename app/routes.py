@@ -16,7 +16,7 @@ def home():
     """Home function, will render some tweets and forms"""
     form = NewTweetForm(prefix='user-')
     if form.validate_on_submit():
-        if(len(form.text.data) <= 280):
+        if(len(form.text.data) <= 280 and form.text.data.count('barre') <= 0):
             if current_user.is_authenticated:
                 tweet = Tweet(message=form.text.data, user_id=current_user.id)
             else:
