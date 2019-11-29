@@ -17,7 +17,7 @@ def home():
     form = NewTweetForm(prefix='user-')
     if form.validate_on_submit():
         if(len(form.text.data) <= 280):
-            tweet = Tweet(message=form.text.data, user_id=current_user.id)
+            tweet = Tweet(message=form.text.data, user_id=current_user.username)
             db.session.add(tweet)
             db.session.commit()
             return redirect(url_for('home'))
